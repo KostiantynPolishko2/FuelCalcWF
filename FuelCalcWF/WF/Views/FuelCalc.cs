@@ -26,7 +26,7 @@ namespace WF.Views
             bottomPanel.Dock = DockStyle.Bottom;
             bottomPanel.Height = (int)(Size.Height) / 6;
 
-            //InitializeCustomComponent();
+            InitializeCustomComponent();
             FuelCostObject = new FuelCost();
         }
 
@@ -77,25 +77,25 @@ namespace WF.Views
         private void distanceTB_Leave(object sender, EventArgs e)
         {
             float TargetValue = 0.0f;
-            //if (distanceTB.Text != "") { TreatInPutData(FuelCost.IsValue(distanceTB.Text), ref TargetValue, ref distanceTB, 0); }
+            if (distanceTB.Text != "") { TreatInPutData(FuelCost.IsValue(distanceTB.Text), ref TargetValue, ref distanceTB, 0); }
 
-            //if (TargetValue != 0) { FuelCostObject.Distance = TargetValue; }
+            if (TargetValue != 0) { FuelCostObject.Distance = TargetValue; }
         }
 
         private void consumeTB_Leave(object sender, EventArgs e)
         {
             float TargetValue = 0.0f;
-            //if (consumeTB.Text != "") { TreatInPutData(FuelCost.IsValue(consumeTB.Text), ref TargetValue, ref consumeTB, 1); }
+            if (consumeTB.Text != "") { TreatInPutData(FuelCost.IsValue(consumeTB.Text), ref TargetValue, ref consumeTB, 1); }
 
-            //if (TargetValue != 0) { FuelCostObject.Consumption = TargetValue; }
+            if (TargetValue != 0) { FuelCostObject.Consumption = TargetValue; }
         }
 
         private void priceTB_Leave(object sender, EventArgs e)
         {
-            //float TargetValue = 0.0f;
-            //if (priceTB.Text != "") { TreatInPutData(FuelCost.IsValue(priceTB.Text), ref TargetValue, ref priceTB, 1); }
+            float TargetValue = 0.0f;
+            if (priceTB.Text != "") { TreatInPutData(FuelCost.IsValue(priceTB.Text), ref TargetValue, ref priceTB, 1); }
 
-            //if (TargetValue != 0) { FuelCostObject.Price = TargetValue; }
+            if (TargetValue != 0) { FuelCostObject.Price = TargetValue; }
         }
 
         private void calcBtn_MouseDown(object sender, MouseEventArgs e)
@@ -113,21 +113,21 @@ namespace WF.Views
                 FuelCostObject.FuelCalculation();
                 FuelCostObject.CostCalculation();
 
-                //ShowLabel(ref resultcalc_infoLabel);
+                ShowLabel(ref resultcalc_infoLabel);
 
-                //resultcalc_infoLabel.Text =
-                //    $"На поездку потребуется {FuelCost.GetTxtHundreths(FuelCostObject.TotalFuelVolume)} л топлива. " +
-                //    $"Она обойдётся в {(int)FuelCostObject.TotalCost} грн {FuelCost.GetIntHundredths(FuelCostObject.TotalCost)} копеек.";
+                resultcalc_infoLabel.Text =
+                    $"На поездку потребуется {FuelCost.GetTxtHundreths(FuelCostObject.TotalFuelVolume)} л топлива. " +
+                    $"Она обойдётся в {(int)FuelCostObject.TotalCost} грн {FuelCost.GetIntHundredths(FuelCostObject.TotalCost)} копеек.";
             }
         }
 
         private void clearBtn_MouseDown(object sender, MouseEventArgs e)
         {
-            //ClearTextBox(ref distanceTB);
-            //ClearTextBox(ref consumeTB);
-            //ClearTextBox(ref priceTB);
+            ClearTextBox(ref distanceTB);
+            ClearTextBox(ref consumeTB);
+            ClearTextBox(ref priceTB);
 
-            //HideLabel(ref resultcalc_infoLabel);
+            HideLabel(ref resultcalc_infoLabel);
         }
     }
 }
