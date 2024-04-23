@@ -51,6 +51,7 @@
             Margin = new Padding(0);
             Name = "BtnChangeTheme";
             Size = new Size(90, 30);
+            Click += BtnChangeTheme_Click;
             ((System.ComponentModel.ISupportInitialize)pcBxTheme).EndInit();
             ResumeLayout(false);
         }
