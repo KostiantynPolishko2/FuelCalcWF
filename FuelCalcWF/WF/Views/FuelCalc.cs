@@ -8,13 +8,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FuelCalcLibrary.Models;
 
-namespace WF
+namespace WF.Views
 {
     public partial class FuelCalc : Form
     {
         private Point lastMousePosition;
-        //private FuelCost FuelCostObject;
+        private FuelCost FuelCostObject;
         public FuelCalc()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace WF
             bottomPanel.Height = (int)(Size.Height) / 6;
 
             //InitializeCustomComponent();
-            //FuelCostObject = new FuelCost();
+            FuelCostObject = new FuelCost();
         }
 
         private void FuelCalc_Load(object sender, EventArgs e)
@@ -109,8 +110,8 @@ namespace WF
 
             if (!flag)
             {
-                //FuelCostObject.FuelCalculation();
-                //FuelCostObject.CostCalculation();
+                FuelCostObject.FuelCalculation();
+                FuelCostObject.CostCalculation();
 
                 //ShowLabel(ref resultcalc_infoLabel);
 

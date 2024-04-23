@@ -1,4 +1,4 @@
-namespace WF
+namespace WF.Views
 {
     internal static class Program
     {

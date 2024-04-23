@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WF
+namespace WF.Views
 {
     partial class FuelCalc
     {
