@@ -12,8 +12,10 @@ namespace WF.Views.UserControls
 {
     public partial class BtnChangeTheme : UserControl
     {
-        public delegate void ThemeHandler();
-        public event ThemeHandler? themeColor;
+        //public delegate void ThemeHandler();
+        //public event ThemeHandler? themeColor;
+        public event Action? themeColor;
+
         public bool isChanded { get; private set; } = true;
         public BtnChangeTheme()
         {
