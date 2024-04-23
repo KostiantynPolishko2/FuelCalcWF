@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FuelCalcLibrary.Models;
+using WF.Views.UserControls;
 
 namespace WF.Views
 {
@@ -16,6 +17,7 @@ namespace WF.Views
     {
         private Point lastMousePosition;
         private FuelCost FuelCostObject;
+        private BtnChangeTheme btnTheme;
         public FuelCalc()
         {
             InitializeComponent();
@@ -28,6 +30,10 @@ namespace WF.Views
 
             InitializeCustomComponent();
             FuelCostObject = new FuelCost();
+            btnTheme = new BtnChangeTheme();
+            btnTheme.Location = new Point(10, distanceTB.Top);
+            btnTheme.TabIndex = 0;
+            topPanel.Controls.Add(this.btnTheme);            
         }
 
         private void FuelCalc_Load(object sender, EventArgs e)
