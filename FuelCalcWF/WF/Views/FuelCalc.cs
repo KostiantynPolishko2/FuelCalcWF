@@ -39,11 +39,6 @@ namespace WF.Views
 
         }
 
-        private void FuelCalc_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void setThemeColor()
         {
             if (btnTheme.isChanded)
