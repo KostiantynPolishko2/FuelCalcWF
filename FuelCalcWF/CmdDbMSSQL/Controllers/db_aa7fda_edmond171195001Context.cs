@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bd.Models;
+namespace CmdDbMSSQL.Models;
 
 public partial class db_aa7fda_edmond171195001Context : DbContext
 {

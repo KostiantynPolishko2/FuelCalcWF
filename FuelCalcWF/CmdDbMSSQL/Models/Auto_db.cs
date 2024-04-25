@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Bd.Models;
+namespace CmdDbMSSQL.Models;
 
 public partial class Auto_db
 {

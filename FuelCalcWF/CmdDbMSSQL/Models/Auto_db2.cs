@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bd.Models
+namespace CmdDbMSSQL.Models
 {
     public partial class Auto_db
     {
