@@ -35,8 +35,8 @@ namespace WF.Views
             btnTheme.TabIndex = 0;
             btnTheme.themeColor += setThemeColor;
 
-            topPanel.Controls.Add(this.btnTheme);    
-            
+            topPanel.Controls.Add(this.btnTheme);
+
         }
 
         private void FuelCalc_Load(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace WF.Views
                 this.BackColor = Color.FromArgb(160, 160, 160);
                 bottomPanel.BackColor = Color.FromArgb(128, 128, 128);
             }
-            
+
         }
 
         private void closeLabel_Click(object sender, EventArgs e)
