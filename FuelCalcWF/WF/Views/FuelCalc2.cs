@@ -17,37 +17,45 @@ namespace WF.Views
         private void InitializeCustomComponent()
         {
             resultcalc_infoLabel.Visible = false;
+            setLabelFontBold(lbMarkAuto, lbModelAuto, lbVEngine);
             setLabelFontBold(distanceLabel, consumeLabel, priceLabel, resultcalcLabel, resultcalc_infoLabel);
+            setLabelFontName(lbMarkAuto, lbModelAuto, lbVEngine);
             setLabelFontName(distanceLabel, consumeLabel, priceLabel, resultcalcLabel, resultcalc_infoLabel);
-
+            setLabelFontSize(10, lbMarkAuto, lbModelAuto, lbVEngine);
             setLabelFontSize(10, distanceLabel, consumeLabel, priceLabel, resultcalc_infoLabel);
             setLabelFontSize(14, resultcalcLabel);
 
-            //set position of labels
             int space = 15;
-            consumeLabel.Location = new Point((int)(Size.Width - consumeLabel.Width) / 2, space);
-            distanceLabel.Location = new Point(consumeLabel.Location.X - distanceLabel.Width - 15, space);
-            priceLabel.Location = new Point(consumeLabel.Location.X + consumeLabel.Width + 15, space);
+
+            //set position of labels for model Auto
+            lbModelAuto.Location = new Point((int)(Width - lbModelAuto.Width) / 2, space);
+            lbVEngine.Location = new Point((int)(Width * 3/4), space);
+            lbMarkAuto.Location = new Point((int)(Width/4 - lbMarkAuto.Width), space);
+
+            //set position of textbox for model Auto
+            txBxMarkAuto.Location = setPositionObj(lbMarkAuto, txBxMarkAuto, 5);
+            txBxModelAuto.Location = setPositionObj(lbModelAuto, txBxModelAuto, 5);
+            txBxVEngine.Location = setPositionObj(lbVEngine, txBxVEngine, 5);
+
+            //set position of labels for model Trip
+            distanceLabel.Location = setPositionObj(txBxMarkAuto, distanceLabel, 40);
+            consumeLabel.Location = setPositionObj(txBxModelAuto, consumeLabel, 40);
+            priceLabel.Location = setPositionObj(txBxVEngine, priceLabel, 40);
 
             //set position of textbox
-            distanceTB.Location = SetPositionTB(distanceLabel, distanceTB, 10);
-            consumeTB.Location = SetPositionTB(consumeLabel, consumeTB, 10);
-            priceTB.Location = SetPositionTB(priceLabel, priceTB, 10);
+            distanceTB.Location = setPositionObj(distanceLabel, distanceTB, 5);
+            consumeTB.Location = setPositionObj(consumeLabel, consumeTB, 5);
+            priceTB.Location = setPositionObj(priceLabel, priceTB, 5);
 
             //set position of button
-            calcBtn.Location = SetPositionBtn(distanceLabel, calcBtn, distanceTB, 0);
-            clearBtn.Location = SetPositionBtn(consumeLabel, clearBtn, consumeTB, 0);
-            saveBtn.Location = SetPositionBtn(priceLabel, saveBtn, priceTB, 0);
+            calcBtn.Location = setPositionObj(distanceTB, calcBtn, 40);
+            clearBtn.Location = setPositionObj(consumeTB, clearBtn, 40);
+            saveBtn.Location = setPositionObj(priceTB, saveBtn, 40);
         }
 
-        private Point SetPositionTB(in Label label, in TextBox TB, int space)
+        private Point setPositionObj(in Control mainObj, in Control referObj, int space)
         {
-            return new Point(label.Location.X + (label.Width - TB.Width) / 2, label.Location.Y + TB.Height + space);
-        } 
-        
-        private Point SetPositionBtn(in Label label, in Button Btn, in TextBox TB, int space)
-        {
-            return new Point(label.Location.X + (label.Width - Btn.Width) / 2, TB.Location.Y + Btn.Height + space);
+            return new Point(mainObj.Left + (mainObj.Width - referObj.Width) / 2, mainObj.Top +mainObj.Height + space);
         }
 
         private void setLabelFontBold(params Label[] label)

@@ -345,11 +345,11 @@ namespace WF.Views
         private Button saveBtn;
         private Button clearBtn;
         private Label lbMarkAuto;
-        private Label lbVEngine;
         private Label lbModelAuto;
-        private TextBox txBxVEngine;
+        private Label lbVEngine;
         private TextBox txBxModelAuto;
         private TextBox txBxMarkAuto;
+        private TextBox txBxVEngine;
     }
 }
 

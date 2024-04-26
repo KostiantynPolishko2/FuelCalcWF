@@ -23,7 +23,7 @@ namespace WF.Views
             InitializeComponent();
 
             topPanel.Dock = DockStyle.Top;
-            topPanel.Height = (int)(Size.Height) / 2 + 20;
+            topPanel.Height = calcBtn.Top + calcBtn.Height + 20;
 
             bottomPanel.Dock = DockStyle.Bottom;
             bottomPanel.Height = (int)(Size.Height) / 6;
@@ -31,7 +31,7 @@ namespace WF.Views
             InitializeCustomComponent();
             FuelCostObject = new FuelCost();
             btnTheme = new BtnChangeTheme();
-            btnTheme.Location = new Point(10, distanceTB.Top);
+            btnTheme.Location = new Point(5, 5);
             btnTheme.TabIndex = 0;
             btnTheme.themeColor += setThemeColor;
 
