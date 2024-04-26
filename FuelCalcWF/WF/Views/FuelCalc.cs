@@ -25,6 +25,7 @@ namespace WF.Views
         private List<ImgApp> imgsApp;
         private Point lastMousePosition;
         private DbController db;
+        private List<Auto_db>? autoDbs { get; set; } = null;
         public FuelCalc()
         {
             InitializeComponent();
@@ -114,6 +115,16 @@ namespace WF.Views
         {
             float TargetValue = 0.0f;
             if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(txBxVEngine.Text), ref TargetValue, ref txBxVEngine, (int)TbName.Vengine); }
+
+            if (isEmpty(txBxMarkAuto, txBxModelAuto, txBxVEngine)) { return; }
+
+            consumeTB.Enabled = false;
+            consumeTB.BackColor = Color.FromArgb(224, 224, 224);
+            string txt = getConsumeFuel().ToString();
+            consumeTB.Enabled = true;
+            consumeTB.BackColor = Color.White;
+
+            consumeTB.Text = txt;
         }
 
         private void calcBtn_MouseDown(object sender, MouseEventArgs e)
@@ -175,17 +186,23 @@ namespace WF.Views
 
             if (enginePower == 0 || fuelConsumption == 0) { return; }
 
-            this.db.Auto_dbs.Add(new Auto_db() 
-            { mark = txBxMarkAuto.Text, model = txBxModelAuto.Text, 
-                engine_power =  enginePower, fuel_consumption = fuelConsumption });
+            this.db.Auto_dbs.Add(new Auto_db()
+            {
+                mark = txBxMarkAuto.Text.ToLower(),
+                model = txBxModelAuto.Text.ToLower(),
+                engine_power = enginePower,
+                fuel_consumption = fuelConsumption
+            });
 
             (bool flag, string msg) = db.isSaveChanges();
-            if (!flag) 
+            if (!flag)
             {
                 MessageBox.Show(msg);
                 return;
             }
             MessageBox.Show("Info saved to DB!");
+            ClearTextBox(distanceTB, consumeTB, priceTB);
+            ClearTextBox(txBxMarkAuto, txBxModelAuto, txBxVEngine);
         }
     }
 }

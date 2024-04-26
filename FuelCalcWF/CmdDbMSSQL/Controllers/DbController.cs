@@ -25,5 +25,17 @@ namespace CmdDbMSSQL.Controllers
                 return (false, sysEx.Message);
             }
         }
+
+        public List<Auto_db>? getAllAutoDb()
+        {
+            try
+            {
+                return Auto_dbs.ToList();
+            }
+            catch (SystemException sysEx)
+            {
+                return null;
+            }
+        }
     }
 }

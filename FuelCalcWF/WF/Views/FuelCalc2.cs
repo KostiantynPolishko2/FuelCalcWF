@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CmdDbMSSQL.Models;
 using FuelCalcLibrary.Models;
 using WF.Models;
 using WF.Resources;
@@ -151,5 +152,18 @@ namespace WF.Views
             imgsApp.Add(new ImgApp(IconsApp.CostCharge, new Point(priceTB.Left - 40 - 10, priceTB.Top)));
         }
 
+        public double getConsumeFuel()
+        {
+            List<Auto_db>? all = db.getAllAutoDb();
+            double.TryParse(txBxVEngine.Text, out double VEngine);
+
+            Auto_db? result = all?.FirstOrDefault(
+                item => item.mark.ToLower().Equals(txBxMarkAuto.Text.ToLower()) &&
+                item.model.ToLower().Equals(txBxModelAuto.Text.ToLower()) &&
+                item.engine_power.Equals(VEngine)
+                );
+
+            return result == null ? 0 : (double)result.fuel_consumption;
+        }
     }
 }
