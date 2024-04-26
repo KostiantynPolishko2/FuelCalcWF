@@ -167,9 +167,17 @@ namespace WF.Views
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
+            if (isEmpty(txBxMarkAuto, txBxModelAuto, txBxVEngine, consumeTB)) { MessageBox.Show("TextBox is empty"); return; }
+
+            float enginePower = 0.0f, fuelConsumption = 0.0f;
+            if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(txBxVEngine.Text), ref enginePower, ref txBxVEngine, (int)TbName.Vengine); }
+            if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(txBxVEngine.Text), ref fuelConsumption, ref consumeTB, (int)TbName.Consume); }
+
+            if (enginePower == 0 || fuelConsumption == 0) { return; }
+
             this.db.Auto_dbs.Add(new Auto_db() 
             { mark = txBxMarkAuto.Text, model = txBxModelAuto.Text, 
-                engine_power =  2.2, fuel_consumption = 5.5 });
+                engine_power =  enginePower, fuel_consumption = fuelConsumption });
 
             (bool flag, string msg) = db.isSaveChanges();
             if (!flag) 
@@ -177,7 +185,7 @@ namespace WF.Views
                 MessageBox.Show(msg);
                 return;
             }
-            else { MessageBox.Show("Info saved to DB!"); }
+            MessageBox.Show("Info saved to DB!");
         }
     }
 }

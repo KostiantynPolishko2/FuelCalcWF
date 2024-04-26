@@ -94,6 +94,12 @@ namespace WF.Views
             }
         }
 
+        private bool isEmpty(params Control[] items)
+        {
+            foreach(var item in items) { if (item.Text == string.Empty) { return true; } }
+            return false;
+        }
+
         private void ClearTextBox(params TextBox[] fields)
         {
             foreach(var field in fields) { field.Clear(); }
