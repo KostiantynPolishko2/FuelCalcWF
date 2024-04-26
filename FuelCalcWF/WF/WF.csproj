@@ -9,7 +9,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CmdDbMSSQL\CmdDbMSSQL.csproj" />
     <ProjectReference Include="..\FuelCalcLibrary\FuelCalcLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\IconsApp.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IconsApp.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\IconsApp.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IconsApp.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MSSQL\" />
   </ItemGroup>
 
 </Project>

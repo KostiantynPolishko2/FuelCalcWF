@@ -24,7 +24,7 @@ namespace FuelCalcLibrary.Models
 
         static FuelCost()
         {
-            Message = new string[] { "Distance", "Consumption", "Price" };
+            Message = new string[] { "Distance", "Consumption", "Price", "Engine Volume" };
         }
         public FuelCost() { }
 
