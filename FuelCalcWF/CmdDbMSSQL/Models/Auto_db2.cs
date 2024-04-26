@@ -8,9 +8,6 @@ namespace CmdDbMSSQL.Models
 {
     public partial class Auto_db
     {
-        public override string ToString()
-        {
-            return $"{mark},{model},{engine_power},{fuel_consumption}";
-        }
+        public override string ToString() => $"{mark} | {model} | {engine_power} | {fuel_consumption}";
     }
 }

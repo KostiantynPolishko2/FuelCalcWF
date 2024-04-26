@@ -160,6 +160,7 @@ namespace WF.Views
             saveBtn.TabIndex = 10;
             saveBtn.Text = "СОХРАНИТЬ";
             saveBtn.UseVisualStyleBackColor = false;
+            saveBtn.Click += saveBtn_Click;
             // 
             // priceTB
             // 
@@ -319,6 +320,7 @@ namespace WF.Views
             Name = "FuelCalc";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Fuel Calculation";
+            Load += FuelCalc_Load;
             KeyDown += FuelCalc_KeyDown;
             MouseDown += FuelCalc_MouseDown;
             MouseMove += FuelCalc_MouseMove;

@@ -12,16 +12,19 @@ using FuelCalcLibrary.Models;
 using WF.Models;
 using WF.Views.UserControls;
 using WF.Resources;
+using CmdDbMSSQL.Controllers;
+using CmdDbMSSQL.Models;
 
 namespace WF.Views
 {
     public partial class FuelCalc : Form
     {
-        private Point lastMousePosition;
         private FuelCost FuelCostObject;
         private BtnChangeTheme btnTheme;
         private Graphics g;
         private List<ImgApp> imgsApp;
+        private Point lastMousePosition;
+        private DbController db;
         public FuelCalc()
         {
             InitializeComponent();
@@ -35,41 +38,13 @@ namespace WF.Views
             InitializeCustomComponent();
             FuelCostObject = new FuelCost();
             btnTheme = new BtnChangeTheme();
-            btnTheme.Location = new Point(5, 5);
-            btnTheme.TabIndex = 0;
-            btnTheme.themeColor += setThemeColor;
-
+            setViewController();
             topPanel.Controls.Add(this.btnTheme);
+
             imgsApp = new List<ImgApp>(6);
             setImgsApp();
-            //iconApp = new ImgApp(IconsApp.AutoMark, new Point(10, lbMarkAuto.Top));
-        }
 
-        private void setImgsApp()
-        {
-            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxMarkAuto.Left - 40 - 10, txBxMarkAuto.Top)));
-            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxModelAuto.Left - 40 - 10, txBxMarkAuto.Top)));
-            imgsApp.Add(new ImgApp(IconsApp.AutoVolumeEngine, new Point(txBxVEngine.Left - 40 - 10, txBxVEngine.Top)));
-            imgsApp.Add(new ImgApp(IconsApp.TripDistance, new Point(distanceTB.Left - 40 - 10, distanceTB.Top)));
-            imgsApp.Add(new ImgApp(IconsApp.FuelConsumance, new Point(consumeTB.Left - 40 - 10, consumeTB.Top)));
-            imgsApp.Add(new ImgApp(IconsApp.CostCharge, new Point(priceTB.Left - 40 - 10, priceTB.Top)));
-        }
-
-        private void setThemeColor()
-        {
-            if (btnTheme.isChanded)
-            {
-                topPanel.BackColor = Color.FromArgb(255, 153, 0);
-                this.BackColor = Color.White;
-                bottomPanel.BackColor = Color.FromArgb(255, 204, 136);
-            }
-            else
-            {
-                topPanel.BackColor = Color.FromArgb(96, 96, 96);
-                this.BackColor = Color.FromArgb(160, 160, 160);
-                bottomPanel.BackColor = Color.FromArgb(128, 128, 128);
-            }
-
+            db = new DbController();
         }
 
         private void closeLabel_Click(object sender, EventArgs e)
@@ -139,8 +114,6 @@ namespace WF.Views
         {
             float TargetValue = 0.0f;
             if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(txBxVEngine.Text), ref TargetValue, ref txBxVEngine, (int)TbName.Vengine); }
-
-            if (TargetValue != 0) { FuelCostObject.Price = TargetValue; }
         }
 
         private void calcBtn_MouseDown(object sender, MouseEventArgs e)
@@ -183,5 +156,28 @@ namespace WF.Views
             }
         }
 
+        private void FuelCalc_Load(object sender, EventArgs e)
+        {
+            if (!db.Database.CanConnect())
+            {
+                setAbility(false, txBxMarkAuto, txBxModelAuto, txBxVEngine, saveBtn);
+                MessageBox.Show("No connection Db");
+            }
+        }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            this.db.Auto_dbs.Add(new Auto_db() 
+            { mark = txBxMarkAuto.Text, model = txBxModelAuto.Text, 
+                engine_power =  2.2, fuel_consumption = 5.5 });
+
+            (bool flag, string msg) = db.isSaveChanges();
+            if (!flag) 
+            {
+                MessageBox.Show(msg);
+                return;
+            }
+            else { MessageBox.Show("Info saved to DB!"); }
+        }
     }
 }

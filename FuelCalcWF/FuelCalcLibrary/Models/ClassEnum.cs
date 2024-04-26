@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FuelCalcLibrary.Models
 {
-    public enum TbName
+    public enum TbName : int
     {
         Distance = 0,
         Consume,

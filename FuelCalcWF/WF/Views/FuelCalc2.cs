@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FuelCalcLibrary.Models;
+using WF.Models;
+using WF.Resources;
 
 namespace WF.Views
 {
@@ -97,14 +99,51 @@ namespace WF.Views
             foreach(var field in fields) { field.Clear(); }
         }
 
-        private void ShowLabel(ref Label fieldLabel)
+        private void setAbility(bool flag, params Control[] items)
         {
-            fieldLabel.Visible = true;
+            foreach (var item in items) 
+            { 
+                item.Enabled = flag;
+                if(item is TextBox) { item.BackColor = Color.FromArgb(224, 224, 224); }
+            }
         }
 
-        private void HideLabel(ref Label fieldLabel)
+        private void ShowLabel(ref Label fieldLabel) => fieldLabel.Visible = true;
+
+        private void HideLabel(ref Label fieldLabel) => fieldLabel.Visible = false;
+
+        private void setThemeColor()
         {
-            fieldLabel.Visible = false;
+            if (btnTheme.isChanded)
+            {
+                topPanel.BackColor = Color.FromArgb(255, 153, 0);
+                this.BackColor = Color.White;
+                bottomPanel.BackColor = Color.FromArgb(255, 204, 136);
+            }
+            else
+            {
+                topPanel.BackColor = Color.FromArgb(96, 96, 96);
+                this.BackColor = Color.FromArgb(160, 160, 160);
+                bottomPanel.BackColor = Color.FromArgb(128, 128, 128);
+            }
         }
+
+        private void setViewController()
+        {
+            btnTheme.Location = new Point(5, 5);
+            btnTheme.TabIndex = 0;
+            btnTheme.themeColor += setThemeColor;
+        }
+
+        private void setImgsApp()
+        {
+            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxMarkAuto.Left - 40 - 10, txBxMarkAuto.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxModelAuto.Left - 40 - 10, txBxMarkAuto.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.AutoVolumeEngine, new Point(txBxVEngine.Left - 40 - 10, txBxVEngine.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.TripDistance, new Point(distanceTB.Left - 40 - 10, distanceTB.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.FuelConsumance, new Point(consumeTB.Left - 40 - 10, consumeTB.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.CostCharge, new Point(priceTB.Left - 40 - 10, priceTB.Top)));
+        }
+
     }
 }

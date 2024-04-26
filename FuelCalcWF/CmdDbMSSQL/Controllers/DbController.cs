@@ -9,9 +9,21 @@ namespace CmdDbMSSQL.Controllers
 {
     public class DbController : db_aa7fda_edmond171195001Context
     {
-        public DbController()
+        public DbController() : base() { }
+
+        public bool isConnection() => Database.CanConnect();
+
+        public (bool, string) isSaveChanges()
         {
-            
+            try
+            {
+                this.SaveChanges();
+                return (true, string.Empty);
+            }
+            catch (SystemException sysEx)
+            {
+                return (false, sysEx.Message);
+            }
         }
     }
 }
