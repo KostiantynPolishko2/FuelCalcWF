@@ -85,6 +85,7 @@ namespace WF.Views
             topPanel.Name = "topPanel";
             topPanel.Size = new Size(801, 273);
             topPanel.TabIndex = 0;
+            topPanel.Paint += topPanel_Paint;
             // 
             // txBxVEngine
             // 

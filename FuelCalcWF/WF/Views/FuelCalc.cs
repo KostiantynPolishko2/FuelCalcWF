@@ -9,7 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FuelCalcLibrary.Models;
+using WF.Models;
 using WF.Views.UserControls;
+using WF.Resources;
 
 namespace WF.Views
 {
@@ -18,6 +20,8 @@ namespace WF.Views
         private Point lastMousePosition;
         private FuelCost FuelCostObject;
         private BtnChangeTheme btnTheme;
+        private Graphics g;
+        private List<ImgApp> imgsApp;
         public FuelCalc()
         {
             InitializeComponent();
@@ -36,7 +40,19 @@ namespace WF.Views
             btnTheme.themeColor += setThemeColor;
 
             topPanel.Controls.Add(this.btnTheme);
+            imgsApp = new List<ImgApp>(6);
+            setImgsApp();
+            //iconApp = new ImgApp(IconsApp.AutoMark, new Point(10, lbMarkAuto.Top));
+        }
 
+        private void setImgsApp()
+        {
+            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxMarkAuto.Left-40-10, txBxMarkAuto.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxModelAuto.Left - 40 - 10, txBxMarkAuto.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.AutoVolumeEngine, new Point(txBxVEngine.Left - 40 - 10, txBxVEngine.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.TripDistance, new Point(distanceTB.Left - 40 - 10, distanceTB.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.FuelConsumance, new Point(consumeTB.Left - 40 - 10, consumeTB.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.CostCharge, new Point(priceTB.Left - 40 - 10, priceTB.Top)));
         }
 
         private void setThemeColor()
@@ -149,6 +165,15 @@ namespace WF.Views
             ClearTextBox(ref priceTB);
 
             HideLabel(ref resultcalc_infoLabel);
+        }
+
+        private void topPanel_Paint(object sender, PaintEventArgs e)
+        {
+            g = e.Graphics;
+            foreach(var img in imgsApp)
+            {
+                g.DrawImage(img.bmp, img.ptn);
+            }          
         }
     }
 }
