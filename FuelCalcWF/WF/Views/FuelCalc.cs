@@ -156,6 +156,7 @@ namespace WF.Views
             ClearTextBox(txBxMarkAuto, txBxModelAuto, txBxVEngine);
 
             HideLabel(ref resultcalc_infoLabel);
+            resultcalcLabel.Text = "Результаты расчёта";
         }
 
         private void topPanel_Paint(object sender, PaintEventArgs e)
@@ -182,7 +183,7 @@ namespace WF.Views
 
             float enginePower = 0.0f, fuelConsumption = 0.0f;
             if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(txBxVEngine.Text), ref enginePower, ref txBxVEngine, (int)TbName.Vengine); }
-            if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(txBxVEngine.Text), ref fuelConsumption, ref consumeTB, (int)TbName.Consume); }
+            if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(consumeTB.Text), ref fuelConsumption, ref consumeTB, (int)TbName.Consume); }
 
             if (enginePower == 0 || fuelConsumption == 0) { return; }
 
@@ -201,8 +202,11 @@ namespace WF.Views
                 return;
             }
             MessageBox.Show("Info saved to DB!");
+            ShowLabel(ref resultcalc_infoLabel, false);
+
             ClearTextBox(distanceTB, consumeTB, priceTB);
             ClearTextBox(txBxMarkAuto, txBxModelAuto, txBxVEngine);
+
         }
     }
 }

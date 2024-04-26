@@ -115,7 +115,11 @@ namespace WF.Views
             }
         }
 
-        private void ShowLabel(ref Label fieldLabel) => fieldLabel.Visible = true;
+        private void ShowLabel(ref Label fieldLabel, bool flag = true)
+        {
+            fieldLabel.Visible = flag;
+            resultcalcLabel.Text = $"Auto: Model {txBxMarkAuto.Text} | Mark {txBxModelAuto.Text} | Engine {txBxVEngine.Text} | Consume {consumeTB.Text}";
+        }
 
         private void HideLabel(ref Label fieldLabel) => fieldLabel.Visible = false;
 
