@@ -47,7 +47,7 @@ namespace WF.Views
 
         private void setImgsApp()
         {
-            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxMarkAuto.Left-40-10, txBxMarkAuto.Top)));
+            imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxMarkAuto.Left - 40 - 10, txBxMarkAuto.Top)));
             imgsApp.Add(new ImgApp(IconsApp.AutoMark, new Point(txBxModelAuto.Left - 40 - 10, txBxMarkAuto.Top)));
             imgsApp.Add(new ImgApp(IconsApp.AutoVolumeEngine, new Point(txBxVEngine.Left - 40 - 10, txBxVEngine.Top)));
             imgsApp.Add(new ImgApp(IconsApp.TripDistance, new Point(distanceTB.Left - 40 - 10, distanceTB.Top)));
@@ -114,7 +114,7 @@ namespace WF.Views
         private void distanceTB_Leave(object sender, EventArgs e)
         {
             float TargetValue = 0.0f;
-            if (distanceTB.Text != "") { TreatInPutData(FuelCost.IsValue(distanceTB.Text), ref TargetValue, ref distanceTB, 0); }
+            if (distanceTB.Text != "") { TreatInPutData(FuelCost.IsValue(distanceTB.Text), ref TargetValue, ref distanceTB, (int)TbName.Distance); }
 
             if (TargetValue != 0) { FuelCostObject.Distance = TargetValue; }
         }
@@ -122,7 +122,7 @@ namespace WF.Views
         private void consumeTB_Leave(object sender, EventArgs e)
         {
             float TargetValue = 0.0f;
-            if (consumeTB.Text != "") { TreatInPutData(FuelCost.IsValue(consumeTB.Text), ref TargetValue, ref consumeTB, 1); }
+            if (consumeTB.Text != "") { TreatInPutData(FuelCost.IsValue(consumeTB.Text), ref TargetValue, ref consumeTB, (int)TbName.Consume); }
 
             if (TargetValue != 0) { FuelCostObject.Consumption = TargetValue; }
         }
@@ -130,7 +130,15 @@ namespace WF.Views
         private void priceTB_Leave(object sender, EventArgs e)
         {
             float TargetValue = 0.0f;
-            if (priceTB.Text != "") { TreatInPutData(FuelCost.IsValue(priceTB.Text), ref TargetValue, ref priceTB, 1); }
+            if (priceTB.Text != "") { TreatInPutData(FuelCost.IsValue(priceTB.Text), ref TargetValue, ref priceTB, (int)TbName.Price); }
+
+            if (TargetValue != 0) { FuelCostObject.Price = TargetValue; }
+        }
+
+        private void txBxVEngine_Leave(object sender, EventArgs e)
+        {
+            float TargetValue = 0.0f;
+            if (txBxVEngine.Text != "") { TreatInPutData(FuelCost.IsValue(txBxVEngine.Text), ref TargetValue, ref txBxVEngine, (int)TbName.Vengine); }
 
             if (TargetValue != 0) { FuelCostObject.Price = TargetValue; }
         }
@@ -160,9 +168,8 @@ namespace WF.Views
 
         private void clearBtn_MouseDown(object sender, MouseEventArgs e)
         {
-            ClearTextBox(ref distanceTB);
-            ClearTextBox(ref consumeTB);
-            ClearTextBox(ref priceTB);
+            ClearTextBox(distanceTB, consumeTB, priceTB);
+            ClearTextBox(txBxMarkAuto, txBxModelAuto, txBxVEngine);
 
             HideLabel(ref resultcalc_infoLabel);
         }
@@ -170,10 +177,11 @@ namespace WF.Views
         private void topPanel_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            foreach(var img in imgsApp)
+            foreach (var img in imgsApp)
             {
                 g.DrawImage(img.bmp, img.ptn);
-            }          
+            }
         }
+
     }
 }

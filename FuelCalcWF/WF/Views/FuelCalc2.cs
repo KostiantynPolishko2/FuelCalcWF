@@ -92,9 +92,9 @@ namespace WF.Views
             }
         }
 
-        private void ClearTextBox(ref TextBox fieldTB)
+        private void ClearTextBox(params TextBox[] fields)
         {
-            fieldTB.Clear();
+            foreach(var field in fields) { field.Clear(); }
         }
 
         private void ShowLabel(ref Label fieldLabel)

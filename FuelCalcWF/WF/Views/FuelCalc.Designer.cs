@@ -94,6 +94,7 @@ namespace WF.Views
             txBxVEngine.Name = "txBxVEngine";
             txBxVEngine.Size = new Size(124, 27);
             txBxVEngine.TabIndex = 16;
+            txBxVEngine.Leave += txBxVEngine_Leave;
             // 
             // txBxModelAuto
             // 
